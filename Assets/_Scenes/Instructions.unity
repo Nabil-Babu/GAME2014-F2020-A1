@@ -1015,9 +1015,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1730718571}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5abf38584992f8240b1fd872ad7bad48, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2aac33341f04b40b21cb0bec547559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneDestination: Start
 --- !u!114 &1730718574
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1062,8 +1063,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1730718573}
-        m_TargetAssemblyTypeName: BackButtonBehaviour, Assembly-CSharp
-        m_MethodName: OnBackButtonPressed
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

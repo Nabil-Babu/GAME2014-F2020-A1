@@ -1225,8 +1225,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1628757042}
-        m_TargetAssemblyTypeName: RestartButtonBehaviour, Assembly-CSharp
-        m_MethodName: OnRestartButtonPressed
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1283,9 +1283,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628757037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d41fcbd9c76cf4d468d5fffd5bed4aed, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2aac33341f04b40b21cb0bec547559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneDestination: Start
 --- !u!1 &1646564379
 GameObject:
   m_ObjectHideFlags: 0

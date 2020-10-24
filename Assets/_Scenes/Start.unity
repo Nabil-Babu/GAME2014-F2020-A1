@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 15893241}
   - component: {fileID: 15893240}
   - component: {fileID: 15893239}
-  - component: {fileID: 15893238}
+  - component: {fileID: 15893242}
   m_Layer: 5
   m_Name: InstructionButton
   m_TagString: Untagged
@@ -163,18 +163,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: -308}
   m_SizeDelta: {x: 600, y: 160}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!114 &15893238
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 15893236}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d22527a13fc513c4f91ec572e27f1117, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &15893239
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -218,9 +206,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 15893238}
-        m_TargetAssemblyTypeName: InstructionButtonBehaviour, Assembly-CSharp
-        m_MethodName: OnInstructionButtonPressed
+      - m_Target: {fileID: 15893242}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -268,6 +256,19 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 15893236}
   m_CullTransparentMesh: 0
+--- !u!114 &15893242
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 15893236}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dc2aac33341f04b40b21cb0bec547559, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sceneDestination: Instructions
 --- !u!1 &434173431
 GameObject:
   m_ObjectHideFlags: 0
@@ -1198,8 +1199,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1628757042}
-        m_TargetAssemblyTypeName: StartButtonBehaviour, Assembly-CSharp
-        m_MethodName: OnStartButtonPressed
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: ChangeScene
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1256,9 +1257,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1628757037}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 27776412b48b91b4192c4e486a2700b8, type: 3}
+  m_Script: {fileID: 11500000, guid: dc2aac33341f04b40b21cb0bec547559, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneDestination: Play
 --- !u!1 &1778118528
 GameObject:
   m_ObjectHideFlags: 0
