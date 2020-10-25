@@ -97,10 +97,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5afda3ec78749384c82327816d21c18c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyManager: {fileID: 0}
+  laserManager: {fileID: 0}
   horizontalSpeed: 2
+  verticalSpeed: 1
+  fireDelay: 2
   horizontalBoundary: 2
   verticalBoundary: 5
-  direction: 1
+  value: 10
 --- !u!61 &4686722768491191546
 BoxCollider2D:
   m_ObjectHideFlags: 0

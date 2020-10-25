@@ -7,6 +7,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 [RequireComponent(typeof(Rigidbody2D))]
 public class PlayerController : MonoBehaviour
 {
@@ -17,13 +18,17 @@ public class PlayerController : MonoBehaviour
     [Header("Player Speed")]
     public float horizontalSpeed;
     public float maxSpeed;
+    [Header("Player Attributes")]
+    public float burstFireTime;
+    public float invincibleModeTime;
+    [Range(0.01f, 0.99f)]
+    public float fireDelayDecayRate;
+    [Header("Player UI")]
+    public Image[] liveIcons;
     public float horizontalTValue;
     [Header("Bullet Firing")]
+    public float startingFireDelay;  
     public float fireDelay;
-    // Private variables
-    private Rigidbody2D m_rigidBody;
-    private Vector3 m_touchesEnded;
-    private bool _firing = false;
     public bool Firing 
     {
         get 
@@ -43,8 +48,14 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
-    private bool canFire = true;  
+    public int lives = 3;   
+    // Private variables
+    private Rigidbody2D m_rigidBody;
+    private Vector3 m_touchesEnded;
+    private bool _firing = false;
+    private bool canTakeDamage = true; 
+    private bool canFire = true;
+    
     void Start()
     {
         m_touchesEnded = new Vector3();
@@ -76,7 +87,10 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator FireTheLasers()
     {
-        laserManager.GetLaser(transform.position);
+        if(laserManager.HasLasers(true))
+        {
+            laserManager.GetLaser(transform.position, false);
+        }
         yield return new WaitForSeconds(fireDelay);
         StartCoroutine(FireTheLasers()); 
     }
@@ -146,5 +160,59 @@ public class PlayerController : MonoBehaviour
             transform.position = new Vector3(-horizontalBoundary, transform.position.y, 0.0f);
         }
 
+    }
+
+    public void OnTriggerEnter2D(Collider2D other)
+    {
+        PowerUpController powerUp; 
+        if(other.GetComponent<LaserController>())
+        {
+            if(other.GetComponent<LaserController>().isEnemyLaser)
+            {
+                if(canTakeDamage)
+                {
+                    if(lives > 0)
+                    {
+                        lives--;
+                    }
+                }
+            }
+        }
+
+        if(other.TryGetComponent<PowerUpController>(out powerUp))
+        {
+            Debug.Log("Getting Power Up");
+            switch(powerUp.powerUpType)
+            {
+                case PowerUpType.BOLT:
+                    StartCoroutine(BurstFireMode());
+                    break;
+                case PowerUpType.SHIELD:
+                    StartCoroutine(InvincibleMode());
+                    break;
+                case PowerUpType.STAR:
+                    Debug.Log("Getting Star");
+                    break;
+            }
+        }
+    }
+
+    IEnumerator BurstFireMode()
+    {
+        fireDelay *= fireDelayDecayRate; 
+        yield return new WaitForSeconds(burstFireTime);
+        fireDelay = startingFireDelay; 
+    }
+
+    IEnumerator InvincibleMode()
+    {
+        canTakeDamage = false;
+        yield return new WaitForSeconds(invincibleModeTime);
+        canTakeDamage = true;  
+    }
+
+    IEnumerator StarMode()
+    {
+        yield return new WaitForSeconds(3.0f);
     }
 }

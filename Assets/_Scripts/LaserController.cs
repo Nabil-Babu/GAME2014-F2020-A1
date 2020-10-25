@@ -6,6 +6,7 @@ public class LaserController : MonoBehaviour
 {
     public float verticalSpeed;
     public float verticalBoundary;
+    public bool isEnemyLaser = false; 
     public LaserManager laserManager;
     public int damage;
     // Update is called once per frame
@@ -21,17 +22,25 @@ public class LaserController : MonoBehaviour
     }
     private void _Move()
     {
-        transform.position += new Vector3(0.0f, verticalSpeed, 0.0f) * Time.deltaTime;
+        if(!isEnemyLaser)
+        {
+            transform.position += new Vector3(0.0f, verticalSpeed, 0.0f) * Time.deltaTime;
+        } 
+        else 
+        {
+            transform.position += new Vector3(0.0f, -verticalSpeed, 0.0f) * Time.deltaTime;
+        }
+        
     }
     private void _CheckBounds()
     {
-        if (transform.position.y > verticalBoundary)
+        if (transform.position.y > verticalBoundary || transform.position.y < -verticalBoundary)
         {
-            laserManager.ReturnLaser(gameObject);
+            laserManager.ReturnLaser(gameObject, isEnemyLaser);
         }
     }
     public void OnTriggerEnter2D(Collider2D other)
     {
-        laserManager.ReturnLaser(gameObject);
+        laserManager.ReturnLaser(gameObject, isEnemyLaser);
     }
 }

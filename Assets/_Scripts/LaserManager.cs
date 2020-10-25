@@ -5,42 +5,82 @@ using UnityEngine;
 public class LaserManager : MonoBehaviour
 {
     public LaserFactory laserFactory;
-    public int MaxLasers;
-     private Queue<GameObject> m_laserPool; 
+    public int MaxPlayerLasers;
+    public int MaxEnemyLasers;
+    private Queue<GameObject> m_playerlaserPool;
+    private Queue<GameObject> m_enemylaserPool;
     // Start is called before the first frame update
     void Start()
     {
         laserFactory = GetComponent<LaserFactory>();
-        _BuildLaserPool();
+        _BuildPlayerLaserPool();
+        _BuildEnemyLaserPool();
     }
 
-    private void _BuildLaserPool()
+    private void _BuildPlayerLaserPool()
     {
         // create empty Queue structure
-        m_laserPool = new Queue<GameObject>();
+        m_playerlaserPool = new Queue<GameObject>();
 
-        for (int count = 0; count < MaxLasers; count++)
+        for (int count = 0; count < MaxPlayerLasers; count++)
         {
-            var tempLaser = laserFactory.createLaser();
-            m_laserPool.Enqueue(tempLaser);
+            var tempLaser = laserFactory.createLaser(false);
+            m_playerlaserPool.Enqueue(tempLaser);
         }
     }
-    public GameObject GetLaser(Vector3 position)
+
+    private void _BuildEnemyLaserPool()
     {
-        var newLaser = m_laserPool.Dequeue();
+        // create empty Queue structure
+        m_enemylaserPool = new Queue<GameObject>();
+
+        for (int count = 0; count < MaxEnemyLasers; count++)
+        {
+            var tempLaser = laserFactory.createLaser(true);
+            m_enemylaserPool.Enqueue(tempLaser);
+        }
+    }
+    public GameObject GetLaser(Vector3 position, bool enemyFlag)
+    {
+        GameObject newLaser;
+        if(enemyFlag)
+        {
+            newLaser = m_enemylaserPool.Dequeue();
+        } 
+        else 
+        {
+            newLaser = m_playerlaserPool.Dequeue();
+        }
+        
         newLaser.SetActive(true);
         newLaser.transform.position = position;
         return newLaser;
     }
 
-    public bool HasLasers()
+    public bool HasLasers(bool enemyFlag)
     {
-        return m_laserPool.Count > 0;
+        if(enemyFlag)
+        {
+            return m_enemylaserPool.Count > 0;
+        } 
+        else 
+        {
+            return m_playerlaserPool.Count > 0;
+        }
+        
     }
 
-    public void ReturnLaser(GameObject returnedLaser)
+    public void ReturnLaser(GameObject returnedLaser, bool enemyFlag)
     {
         returnedLaser.SetActive(false);
-        m_laserPool.Enqueue(returnedLaser);
+        if(enemyFlag)
+        {
+            m_enemylaserPool.Enqueue(returnedLaser);
+        } 
+        else 
+        {
+            m_playerlaserPool.Enqueue(returnedLaser);
+        }
+        
     }
 }
