@@ -9,6 +9,7 @@ public class SceneChanger : MonoBehaviour
 
     public void ChangeScene()
     {
+        SoundManager.instance.PLaySE("ButtonSelected");
         SceneManager.LoadScene(sceneDestination);
     }
 }

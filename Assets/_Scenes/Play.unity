@@ -149,7 +149,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215619422}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 6.38, z: 0}
+  m_LocalPosition: {x: 0, y: 5.18, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1850,10 +1850,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 276303517741581380, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: m_Color.a
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 276303517741581381, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1902,62 +1898,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581383, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: m_Layer
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581383, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: m_TagString
-      value: Player
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: liveIcons.Array.size
-      value: 3
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: lifeIcons.Array.size
-      value: 3
-      objectReference: {fileID: 0}
     - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
       propertyPath: laserManager
       value: 
       objectReference: {fileID: 1460014834}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: fireDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: gameController
-      value: 
-      objectReference: {fileID: 1332671528}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: burstFireTime
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: invincibleModeTime
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: fireDelayDecayRate
-      value: 0.505
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: startingFireDelay
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: liveIcons.Array.data[0]
-      value: 
-      objectReference: {fileID: 560049779}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: liveIcons.Array.data[1]
-      value: 
-      objectReference: {fileID: 1919011176}
-    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
-      propertyPath: liveIcons.Array.data[2]
-      value: 
-      objectReference: {fileID: 250025973}
     - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
       propertyPath: lifeIcons.Array.data[0]
       value: 

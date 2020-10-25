@@ -21,10 +21,13 @@ public class PlayerController : MonoBehaviour
     [Header("Player Attributes")]
     public float burstFireTime;
     public float invincibleModeTime;
+    public float starModeTime;
     [Range(0.01f, 0.99f)]
     public float fireDelayDecayRate;
     [Header("Player UI")]
     public Image[] lifeIcons;
+    public GameObject Shield;
+    public GameObject BurstFire; 
     public float horizontalTValue;
     [Header("Bullet Firing")]
     public float startingFireDelay;  
@@ -62,11 +65,13 @@ public class PlayerController : MonoBehaviour
         }
     }
     // Private variables
+    [SerializeField]
     private int _lives = 3;   
     private Rigidbody2D m_rigidBody;
     private Vector3 m_touchesEnded;
     private bool _firing = false;
-    private bool canTakeDamage = true; 
+    [SerializeField]
+    private bool invincibleMode = false; 
     private bool canFire = true;
     
     void Start()
@@ -103,6 +108,7 @@ public class PlayerController : MonoBehaviour
         if(laserManager.HasLasers(true))
         {
             laserManager.GetLaser(transform.position, false);
+            SoundManager.instance.PLaySE("Laser");
         }
         yield return new WaitForSeconds(fireDelay);
         StartCoroutine(FireTheLasers()); 
@@ -182,11 +188,12 @@ public class PlayerController : MonoBehaviour
         {
             if(other.GetComponent<LaserController>().isEnemyLaser)
             {
-                if(canTakeDamage)
+                if(!invincibleMode)
                 {
                     if(Lives > 0)
                     {
                         Lives--;
+                        SoundManager.instance.PLaySE("LoseLife");
                     }
                 }
             }
@@ -199,12 +206,15 @@ public class PlayerController : MonoBehaviour
             {
                 case PowerUpType.BOLT:
                     StartCoroutine(BurstFireMode());
+                    SoundManager.instance.PLaySE("Bolt");
                     break;
                 case PowerUpType.SHIELD:
                     StartCoroutine(InvincibleMode());
+                    SoundManager.instance.PLaySE("Shield");
                     break;
                 case PowerUpType.STAR:
-                    Debug.Log("Getting Star");
+                    StartCoroutine(StarMode());
+                    SoundManager.instance.PLaySE("Star");
                     break;
             }
         }
@@ -212,21 +222,36 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator BurstFireMode()
     {
-        fireDelay *= fireDelayDecayRate; 
+        fireDelay *= fireDelayDecayRate;
+        BurstFire.SetActive(true); 
         yield return new WaitForSeconds(burstFireTime);
-        fireDelay = startingFireDelay; 
+        fireDelay = startingFireDelay;
+        BurstFire.SetActive(false);  
     }
 
     IEnumerator InvincibleMode()
     {
-        canTakeDamage = false;
-        yield return new WaitForSeconds(invincibleModeTime);
-        canTakeDamage = true;  
+        if(!invincibleMode)
+        {
+            invincibleMode = true;
+            Shield.SetActive(true);
+            yield return new WaitForSeconds(invincibleModeTime);
+            invincibleMode = false;
+            Shield.SetActive(false);
+        }  
     }
 
     IEnumerator StarMode()
     {
-        yield return new WaitForSeconds(3.0f);
+        fireDelay *= 0.75f;
+        BurstFire.SetActive(true); 
+        invincibleMode = true;
+        Shield.SetActive(true);
+        yield return new WaitForSeconds(starModeTime);
+        invincibleMode = false;
+        Shield.SetActive(false);
+        fireDelay = startingFireDelay;
+        BurstFire.SetActive(false);
     }
 
     void UpdateIconUI()
