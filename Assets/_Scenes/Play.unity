@@ -796,7 +796,7 @@ GameObject:
   - component: {fileID: 1120312308}
   m_Layer: 5
   m_Name: ScoreLabel
-  m_TagString: Untagged
+  m_TagString: Score
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -817,8 +817,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_AnchoredPosition: {x: -37, y: 0}
+  m_SizeDelta: {x: 400, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1120312308
 MonoBehaviour:
@@ -1135,7 +1135,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   laserFactory: {fileID: 1460014833}
   MaxPlayerLasers: 100
-  MaxEnemyLasers: 100
+  MaxEnemyLasers: 200
 --- !u!1 &1464160465
 GameObject:
   m_ObjectHideFlags: 0
@@ -1850,6 +1850,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 276303517741581380, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: m_Color.a
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 276303517741581381, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1902,6 +1906,18 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 276303517741581383, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: m_TagString
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: liveIcons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: lifeIcons.Array.size
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
       propertyPath: laserManager
       value: 
@@ -1916,7 +1932,7 @@ PrefabInstance:
       objectReference: {fileID: 1332671528}
     - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
       propertyPath: burstFireTime
-      value: 20
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
       propertyPath: invincibleModeTime
@@ -1930,5 +1946,29 @@ PrefabInstance:
       propertyPath: startingFireDelay
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: liveIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 560049779}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: liveIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1919011176}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: liveIcons.Array.data[2]
+      value: 
+      objectReference: {fileID: 250025973}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: lifeIcons.Array.data[0]
+      value: 
+      objectReference: {fileID: 560049779}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: lifeIcons.Array.data[1]
+      value: 
+      objectReference: {fileID: 1919011176}
+    - target: {fileID: 276303517741581386, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}
+      propertyPath: lifeIcons.Array.data[2]
+      value: 
+      objectReference: {fileID: 250025973}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b4a2a02af1c5724883ee341728123ac, type: 3}

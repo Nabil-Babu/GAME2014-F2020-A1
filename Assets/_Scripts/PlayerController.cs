@@ -24,7 +24,7 @@ public class PlayerController : MonoBehaviour
     [Range(0.01f, 0.99f)]
     public float fireDelayDecayRate;
     [Header("Player UI")]
-    public Image[] liveIcons;
+    public Image[] lifeIcons;
     public float horizontalTValue;
     [Header("Bullet Firing")]
     public float startingFireDelay;  
@@ -48,8 +48,21 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-    public int lives = 3;   
+    
+    public int Lives
+    {
+        get
+        {
+            return _lives;
+        }
+        set
+        {
+            _lives = value;
+            UpdateIconUI();
+        }
+    }
     // Private variables
+    private int _lives = 3;   
     private Rigidbody2D m_rigidBody;
     private Vector3 m_touchesEnded;
     private bool _firing = false;
@@ -171,9 +184,9 @@ public class PlayerController : MonoBehaviour
             {
                 if(canTakeDamage)
                 {
-                    if(lives > 0)
+                    if(Lives > 0)
                     {
-                        lives--;
+                        Lives--;
                     }
                 }
             }
@@ -214,5 +227,18 @@ public class PlayerController : MonoBehaviour
     IEnumerator StarMode()
     {
         yield return new WaitForSeconds(3.0f);
+    }
+
+    void UpdateIconUI()
+    {
+        foreach (Image icon in lifeIcons)
+        {
+            icon.gameObject.SetActive(false); 
+        }
+
+        for (int i = 0; i < Lives; i++)
+        {
+            lifeIcons[i].gameObject.SetActive(true);
+        }
     }
 }

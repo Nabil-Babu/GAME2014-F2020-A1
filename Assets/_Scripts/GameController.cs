@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine.UI;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 [RequireComponent(typeof(SceneChanger))]
 public class GameController : MonoBehaviour
 {
@@ -17,11 +18,13 @@ public class GameController : MonoBehaviour
     public PlayerController player;
     public TextMeshProUGUI score; 
     private SceneChanger sceneChanger;
+
     public void Start()
     {
         player = FindObjectOfType<PlayerController>();
         sceneChanger = GetComponent<SceneChanger>();
         score.text = PlayerScore.ToString();
+        
     }
 
     public void Update()
@@ -36,23 +39,25 @@ public class GameController : MonoBehaviour
 
     public void CheckForPlayerDeath()
     {
-        if(player.lives > 0)
+        if(player != null)
         {
-            playerAlive = true;
-        } 
-        else 
-        {
-            playerAlive = false;
-            player.gameObject.SetActive(false);
-            Invoke("GameOver", 3.0f);     
+            if(player.Lives > 0)
+            {
+                playerAlive = true;
+            } 
+            else 
+            {
+                playerAlive = false;
+                player.gameObject.SetActive(false);
+                Invoke("GameOver", 3.0f);     
+            }
         }
+        
     }
 
     public void GameOver()
     {
+        PlayerPrefs.SetInt("score", PlayerScore);
         sceneChanger.ChangeScene();
     }
-
-    // Update UI for and Lives
-
 }

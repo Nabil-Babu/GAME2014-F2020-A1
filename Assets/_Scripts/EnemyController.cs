@@ -63,6 +63,7 @@ public class EnemyController : MonoBehaviour
     {
         if(transform.position.y <= verticalBoundary && laserManager.HasLasers(true))
         {
+            Debug.Log("Firing laser enemy");
             laserManager.GetLaser(transform.position, true);
         }
         yield return new WaitForSeconds(fireDelay);
