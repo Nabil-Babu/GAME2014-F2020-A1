@@ -44,10 +44,6 @@ public class PlayerController : MonoBehaviour
             if(_firing)
             {
                 StartCoroutine(FireTheLasers());
-            } 
-            else 
-            {
-                StopAllCoroutines(); 
             }
         }
     }
@@ -72,12 +68,10 @@ public class PlayerController : MonoBehaviour
     private bool _firing = false;
     [SerializeField]
     private bool invincibleMode = false; 
-    private bool canFire = true;
-    
     void Start()
     {
         m_touchesEnded = new Vector3();
-        m_rigidBody = GetComponent<Rigidbody2D>(); 
+        m_rigidBody = GetComponent<Rigidbody2D>();
     }
 
     
@@ -87,7 +81,7 @@ public class PlayerController : MonoBehaviour
         _CheckBounds();
         _CheckIfFiring();
     }
-
+    // Checks for Finger touching the screen
     private void _CheckIfFiring()
     {
         if(Input.touches.Length > 0)
@@ -102,16 +96,19 @@ public class PlayerController : MonoBehaviour
             Firing = false; 
         }
     }
-
+    // Coroutine to handle firing
     IEnumerator FireTheLasers()
     {
-        if(laserManager.HasLasers(true))
+        if(Firing)
         {
-            laserManager.GetLaser(transform.position, false);
-            SoundManager.instance.PLaySE("Laser");
+            if(laserManager.HasLasers(true))
+            {
+                laserManager.GetLaser(transform.position, false);
+                SoundManager.instance.PLaySE("Laser");
+            }
+            yield return new WaitForSeconds(fireDelay);
+            StartCoroutine(FireTheLasers());
         }
-        yield return new WaitForSeconds(fireDelay);
-        StartCoroutine(FireTheLasers()); 
     }
 
 
@@ -199,6 +196,18 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if(other.GetComponent<EnemyController>())
+        {
+            if(!invincibleMode)
+            {
+                if(Lives > 0)
+                {
+                    Lives--;
+                    SoundManager.instance.PLaySE("LoseLife");
+                }
+            }
+        }
+        // Starts Coroutines for each powerup
         if(other.TryGetComponent<PowerUpController>(out powerUp))
         {
             Debug.Log("Getting Power Up");
@@ -219,7 +228,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     }
-
+    // Shortens the delay between shots for a period of time 
     IEnumerator BurstFireMode()
     {
         fireDelay *= fireDelayDecayRate;
@@ -228,29 +237,26 @@ public class PlayerController : MonoBehaviour
         fireDelay = startingFireDelay;
         BurstFire.SetActive(false);  
     }
-
+    // Flips invinciblility mode
     IEnumerator InvincibleMode()
-    {
-        if(!invincibleMode)
-        {
-            invincibleMode = true;
-            Shield.SetActive(true);
-            yield return new WaitForSeconds(invincibleModeTime);
-            invincibleMode = false;
-            Shield.SetActive(false);
-        }  
+    {  
+        invincibleMode = true;
+        Shield.SetActive(true);
+        yield return new WaitForSeconds(invincibleModeTime);
+        invincibleMode = false;
+        Shield.SetActive(false);     
     }
-
+    // Both Burst and Invincible
     IEnumerator StarMode()
     {
-        fireDelay *= 0.75f;
-        BurstFire.SetActive(true); 
+        fireDelay *= 0.1f;
         invincibleMode = true;
+        BurstFire.SetActive(true); 
         Shield.SetActive(true);
         yield return new WaitForSeconds(starModeTime);
         invincibleMode = false;
-        Shield.SetActive(false);
         fireDelay = startingFireDelay;
+        Shield.SetActive(false);
         BurstFire.SetActive(false);
     }
 

@@ -29,7 +29,7 @@ Transform:
   m_GameObject: {fileID: 276303517741581383}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: -4.54, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 1}
+  m_LocalScale: {x: 3, y: 3, z: 1}
   m_Children:
   - {fileID: 4091702940383420185}
   - {fileID: 576726939412752046}
@@ -135,8 +135,8 @@ MonoBehaviour:
   Shield: {fileID: 6411231916891992788}
   BurstFire: {fileID: 6845151414075817723}
   horizontalTValue: 0.1
-  startingFireDelay: 0.5
-  fireDelay: 0.5
+  startingFireDelay: 0.25
+  fireDelay: 0.25
   _lives: 3
   invincibleMode: 0
 --- !u!61 &276303517741581384

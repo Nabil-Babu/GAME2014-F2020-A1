@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/**
+    LaserController.cs
+    Nabil Babu
+    101214336
+    Oct 24th 2020
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,7 +12,7 @@ public class LaserController : MonoBehaviour
 {
     public float verticalSpeed;
     public float verticalBoundary;
-    public bool isEnemyLaser = false; 
+    public bool isEnemyLaser; 
     public LaserManager laserManager;
     public int damage;
     // Update is called once per frame

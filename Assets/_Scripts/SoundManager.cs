@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/**
+    SoundManager.cs
+    Nabil Babu
+    101214336
+    Oct 25th 2020
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement; 
@@ -89,14 +95,17 @@ public class SoundManager : MonoBehaviour
             case "Start":
             case "Instructions":
                 audioSourceBGM.clip = bgmSounds[0].audioClip;
+                audioSourceBGM.volume = 0.25f;
                 audioSourceBGM.Play();
                 break;
             case "Play":
                 audioSourceBGM.clip = bgmSounds[1].audioClip;
+                audioSourceBGM.volume = 0.25f;
                 audioSourceBGM.Play();
                 break;
             case "End":
                 audioSourceBGM.clip = bgmSounds[2].audioClip;
+                audioSourceBGM.volume = 1;
                 audioSourceBGM.Play();
                 break;
             default:

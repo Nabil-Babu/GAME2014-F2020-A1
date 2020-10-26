@@ -1,4 +1,10 @@
-﻿using System.Collections;
+﻿/**
+    LaserFactory.cs
+    Nabil Babu
+    101214336
+    Oct 24th 2020
+*/
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
